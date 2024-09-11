@@ -56,4 +56,7 @@ public class KitchenController {
         }
     }
 
+    //    Aulas 4.33 e 4.34 ensinam como fazer o UPDATE parcial usando o PATCH.
+
+
 }
