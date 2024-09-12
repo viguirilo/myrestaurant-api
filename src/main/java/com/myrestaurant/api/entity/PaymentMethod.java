@@ -2,6 +2,7 @@ package com.myrestaurant.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.myrestaurant.api.vo.PaymentMethodRequestVO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,5 +26,9 @@ public class PaymentMethod implements Serializable {
     @Column(name = "description", nullable = false)
     @JsonProperty(value = "description")
     private String description;
+
+    public PaymentMethod(PaymentMethodRequestVO paymentMethodRequestVO) {
+        this.description = paymentMethodRequestVO.getDescription();
+    }
 
 }
