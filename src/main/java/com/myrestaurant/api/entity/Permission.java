@@ -2,6 +2,7 @@ package com.myrestaurant.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.myrestaurant.api.vo.PermissionRequestVO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,10 +25,15 @@ public class Permission implements Serializable {
 
     @Column(name = "name", nullable = false)
     @JsonProperty(value = "name")
-    String name;
+    private String name;
 
     @Column(name = "description", nullable = false)
     @JsonProperty(value = "description")
     private String description;
+
+    public Permission(PermissionRequestVO permissionRequestVO) {
+        this.name = permissionRequestVO.getName();
+        this.description = permissionRequestVO.getDescription();
+    }
 
 }
