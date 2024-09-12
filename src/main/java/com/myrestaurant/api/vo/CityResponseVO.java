@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 public class CityResponseVO {
 
     public Long id;
-
     public String name;
-
     public State state;
 
     public CityResponseVO(City city) {
