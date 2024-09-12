@@ -2,6 +2,7 @@ package com.myrestaurant.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.myrestaurant.api.vo.GroupRequestVO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "group")
+@Table(name = "`group`")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@JsonRootName(value = "group")
+@JsonRootName(value = "`group`")
 public class Group implements Serializable {
 
     @Id
@@ -34,5 +35,9 @@ public class Group implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
     private List<Permission> permissions = new ArrayList<>();
+
+    public Group(GroupRequestVO groupRequestVO) {
+        this.name = groupRequestVO.getName();
+    }
 
 }
