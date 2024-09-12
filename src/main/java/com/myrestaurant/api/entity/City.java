@@ -27,7 +27,7 @@ public class City implements Serializable {
     @JsonProperty(value = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id", nullable = false)
     @JsonProperty("state")
     private State state;

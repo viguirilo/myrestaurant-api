@@ -33,9 +33,9 @@ public class CityService {
     public City update(Long id, CityRequestVO cityRequestVO) {
         Optional<City> cityOptional = cityRepository.findById(id);
         if (cityOptional.isPresent()) {
-            City kitchen = cityOptional.get();
-            BeanUtils.copyProperties(cityRequestVO, kitchen, "id");
-            return cityRepository.save(kitchen);
+            City city = cityOptional.get();
+            BeanUtils.copyProperties(cityRequestVO, city, "id");
+            return cityRepository.save(city);
         } else return null;
     }
 
