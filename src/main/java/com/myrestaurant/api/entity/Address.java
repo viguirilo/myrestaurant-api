@@ -1,6 +1,7 @@
 package com.myrestaurant.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.myrestaurant.api.vo.RestaurantRequestVO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,8 +35,17 @@ public class Address implements Serializable {
     @JsonProperty(value = "addressZipCode")
     private String addressZipCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "address_city_id")
     private City city;
+
+    public Address(RestaurantRequestVO restaurantRequestVO, City city) {
+        this.addressStreetOrAvenue = restaurantRequestVO.getAddressStreetOrAvenue();
+        this.addressNumber = restaurantRequestVO.getAddressNumber();
+        this.addressComplement = restaurantRequestVO.getAddressComplement();
+        this.addressNeighborhood = restaurantRequestVO.getAddressNeighborhood();
+        this.addressZipCode = restaurantRequestVO.getAddressZipCode();
+        this.city = city;
+    }
 
 }
