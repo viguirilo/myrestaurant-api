@@ -2,6 +2,7 @@ package com.myrestaurant.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.myrestaurant.api.vo.StateRequestVO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,10 @@ public class State implements Serializable {
 
     @JsonProperty(value = "name")
     @Column(name = "name", nullable = false)
-    String name;
+    private String name;
+
+    public State(StateRequestVO stateRequestVO) {
+        this.name = stateRequestVO.getName();
+    }
 
 }
