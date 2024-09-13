@@ -32,9 +32,9 @@ public class City implements Serializable {
     @JsonProperty("state")
     private State state;
 
-    public City(CityRequestVO cityRequestVO) {
+    public City(CityRequestVO cityRequestVO, State state) {
         this.name = cityRequestVO.getName();
-        this.state = cityRequestVO.getState();
+        this.state = state;
     }
 
 }
