@@ -2,6 +2,7 @@ package com.myrestaurant.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.myrestaurant.api.vo.ProductRequestVO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,9 +40,17 @@ public class Product implements Serializable {
     @JsonProperty(value = "active")
     private Boolean active;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @JsonProperty("restaurant")
     private Restaurant restaurant;
+
+    public Product(ProductRequestVO productRequestVO, Restaurant restaurant) {
+        this.name = productRequestVO.getName();
+        this.description = productRequestVO.getDescription();
+        this.price = productRequestVO.getPrice();
+        this.active = productRequestVO.getActive();
+        this.restaurant = restaurant;
+    }
 
 }
