@@ -1,6 +1,10 @@
 package com.myrestaurant.api.service;
 
+import com.myrestaurant.api.entity.City;
+import com.myrestaurant.api.entity.Kitchen;
 import com.myrestaurant.api.entity.Restaurant;
+import com.myrestaurant.api.repository.CityRepository;
+import com.myrestaurant.api.repository.KitchenRepository;
 import com.myrestaurant.api.repository.RestaurantRepository;
 import com.myrestaurant.api.vo.RestaurantRequestVO;
 import com.myrestaurant.api.vo.RestaurantResponseVO;
@@ -16,10 +20,18 @@ import java.util.Optional;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+    private final KitchenRepository kitchenRepository;
+    private final CityRepository cityRepository;
 
-//    Rever aula 4.30 para adequar como ele implementa esse método
+    //    Rever aula 4.30 para adequar como ele implementa esse método
     public Restaurant save(RestaurantRequestVO restaurantRequestVO) {
-        return restaurantRepository.save(new Restaurant(restaurantRequestVO));
+        Optional<Kitchen> kitchenOptional = kitchenRepository.findById(restaurantRequestVO.getKitchenId());
+        Optional<City> cityOptional = cityRepository.findById(restaurantRequestVO.getAddressCityId());
+        if (kitchenOptional.isPresent() && cityOptional.isPresent()) {
+            Kitchen kitchen = kitchenOptional.get();
+            City city = cityOptional.get();
+            return restaurantRepository.save(new Restaurant(restaurantRequestVO, kitchen, city));
+        } else return null;
     }
 
     public List<Restaurant> findAll() {

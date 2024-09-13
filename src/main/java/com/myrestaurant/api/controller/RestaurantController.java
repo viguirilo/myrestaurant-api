@@ -21,8 +21,10 @@ public class RestaurantController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Restaurant save(@RequestBody RestaurantRequestVO restaurantRequestVO) {
-        return restaurantService.save(restaurantRequestVO);
+    public ResponseEntity<Restaurant> save(@RequestBody RestaurantRequestVO restaurantRequestVO) {
+        Restaurant restaurant = restaurantService.save(restaurantRequestVO);
+        if (restaurant == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(restaurant);
     }
 
     @GetMapping
