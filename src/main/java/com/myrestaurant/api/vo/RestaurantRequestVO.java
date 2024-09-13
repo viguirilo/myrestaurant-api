@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class RestaurantRequestVO {
 
     public String name;
