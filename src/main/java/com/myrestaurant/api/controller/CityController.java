@@ -21,8 +21,10 @@ public class CityController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public City save(@RequestBody CityRequestVO cityRequestVO) {
-        return cityService.save(cityRequestVO);
+    public ResponseEntity<City> save(@RequestBody CityRequestVO cityRequestVO) {
+        City city = cityService.save(cityRequestVO);
+        if (city == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(city);
     }
 
     @GetMapping

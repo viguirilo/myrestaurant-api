@@ -1,7 +1,9 @@
 package com.myrestaurant.api.service;
 
 import com.myrestaurant.api.entity.City;
+import com.myrestaurant.api.entity.State;
 import com.myrestaurant.api.repository.CityRepository;
+import com.myrestaurant.api.repository.StateRepository;
 import com.myrestaurant.api.vo.CityRequestVO;
 import com.myrestaurant.api.vo.CityResponseVO;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +18,14 @@ import java.util.Optional;
 public class CityService {
 
     private final CityRepository cityRepository;
+    private final StateRepository stateRepository;
 
     public City save(CityRequestVO cityRequestVO) {
-        return cityRepository.save(new City(cityRequestVO));
+        Optional<State> stateOptional = stateRepository.findById(cityRequestVO.getStateId());
+        if (stateOptional.isPresent()) {
+            State state = stateOptional.get();
+            return cityRepository.save(new City(cityRequestVO, state));
+        } else return null;
     }
 
     public List<City> findAll() {
@@ -46,7 +53,6 @@ public class CityService {
             cityRepository.delete(city);
             return city;
         } else return null;
-
     }
 
 }
