@@ -1,6 +1,5 @@
 package com.myrestaurant.api.vo;
 
-import com.myrestaurant.api.entity.Kitchen;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +18,12 @@ public class RestaurantRequestVO {
     public Boolean open;
     public LocalDateTime creationDate;
     public LocalDateTime updateDate;
-    public Kitchen kitchen;
+    public Long kitchenId;
+    public String addressStreetOrAvenue;
+    public String addressNumber;
+    public String addressComplement;
+    public String addressNeighborhood;
+    public String addressZipCode;
+    public Long addressCityId;
 
 }

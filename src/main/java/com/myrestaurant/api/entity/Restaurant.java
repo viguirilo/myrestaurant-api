@@ -58,7 +58,7 @@ public class Restaurant implements Serializable {
     @JsonProperty(value = "updateDate")
     private LocalDateTime updateDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "kitchen_id", nullable = false)
     @JsonProperty(value = "kitchen")
     private Kitchen kitchen;
@@ -72,8 +72,6 @@ public class Restaurant implements Serializable {
     )
     private List<PaymentMethod> paymentMethods = new ArrayList<>();
 
-    //    Colocamos jsonignore pois o payload de endereço pode ser muito grande em uma busca de findAll
-    @JsonIgnore
     @Embedded
     private Address address;
 
@@ -81,14 +79,15 @@ public class Restaurant implements Serializable {
     @OneToMany(mappedBy = "restaurant")
     private List<Product> products = new ArrayList<>();
 
-    public Restaurant(RestaurantRequestVO restaurantRequestVO) {
+    public Restaurant(RestaurantRequestVO restaurantRequestVO, Kitchen kitchen, City city) {
         this.name = restaurantRequestVO.getName();
         this.shipRate = restaurantRequestVO.getShipRate();
         this.active = restaurantRequestVO.getActive();
         this.open = restaurantRequestVO.getOpen();
         this.creationDate = restaurantRequestVO.getCreationDate();
         this.updateDate = restaurantRequestVO.getUpdateDate();
-        this.kitchen = restaurantRequestVO.getKitchen();
+        this.kitchen = kitchen;
+        this.address = new Address(restaurantRequestVO, city);
     }
 
 }
