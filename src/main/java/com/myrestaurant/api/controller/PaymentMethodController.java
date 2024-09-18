@@ -39,8 +39,8 @@ public class PaymentMethodController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<PaymentMethod> update(@PathVariable Long id, @RequestBody PaymentMethodRequestVO paymentMethodRequestVO) {
         PaymentMethod paymentMethod = paymentMethodService.update(id, paymentMethodRequestVO);
-        if (paymentMethod != null) return ResponseEntity.ok().body(paymentMethod);
-        else return ResponseEntity.notFound().build();
+        if (paymentMethod == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(paymentMethod);
     }
 
     @DeleteMapping(value = "/{id}")

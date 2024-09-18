@@ -41,12 +41,12 @@ public class KitchenController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Kitchen> update(@PathVariable Long id, @RequestBody KitchenRequestVO kitchenRequestVO) {
         Kitchen kitchen = kitchenService.update(id, kitchenRequestVO);
-        if (kitchen != null) return ResponseEntity.ok().body(kitchen);
-        else return ResponseEntity.notFound().build();
+        if (kitchen == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(kitchen);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete (@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         try {
             Kitchen kitchen = kitchenService.delete(id);
             if (kitchen == null) return ResponseEntity.notFound().build();

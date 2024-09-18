@@ -42,8 +42,8 @@ public class RestaurantController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Restaurant> update(@PathVariable Long id, @RequestBody RestaurantRequestVO restaurantRequestVO) {
         Restaurant restaurant = restaurantService.update(id, restaurantRequestVO);
-        if (restaurant != null) return ResponseEntity.ok().body(restaurant);
-        else return ResponseEntity.notFound().build();
+        if (restaurant == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(restaurant);
     }
 
     @DeleteMapping(value = "/{id}")
