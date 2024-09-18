@@ -40,8 +40,8 @@ public class PermissionController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Permission> update(@PathVariable Long id, @RequestBody PermissionRequestVO permissionRequestVO) {
         Permission permission = permissionService.update(id, permissionRequestVO);
-        if (permission != null) return ResponseEntity.ok().body(permission);
-        else return ResponseEntity.notFound().build();
+        if (permission == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(permission);
     }
 
     @DeleteMapping(value = "/{id}")

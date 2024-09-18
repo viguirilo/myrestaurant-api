@@ -42,8 +42,8 @@ public class CityController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<City> update(@PathVariable Long id, @RequestBody CityRequestVO cityRequestVO) {
         City city = cityService.update(id, cityRequestVO);
-        if (city != null) return ResponseEntity.ok().body(city);
-        else return ResponseEntity.notFound().build();
+        if (city == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(city);
     }
 
     @DeleteMapping(value = "/{id}")

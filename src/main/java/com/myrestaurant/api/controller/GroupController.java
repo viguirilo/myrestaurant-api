@@ -40,8 +40,8 @@ public class GroupController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Group> update(@PathVariable Long id, @RequestBody GroupRequestVO groupRequestVO) {
         Group group = groupService.update(id, groupRequestVO);
-        if (group != null) return ResponseEntity.ok().body(group);
-        else return ResponseEntity.notFound().build();
+        if (group == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(group);
     }
 
     @DeleteMapping(value = "/{id}")

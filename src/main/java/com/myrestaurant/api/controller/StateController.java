@@ -40,8 +40,8 @@ public class StateController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<State> update(@PathVariable Long id, @RequestBody StateRequestVO stateRequestVO) {
         State state = stateService.update(id, stateRequestVO);
-        if (state != null) return ResponseEntity.ok().body(state);
-        else return ResponseEntity.notFound().build();
+        if (state == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok().body(state);
     }
 
     @DeleteMapping(value = "/{id}")
