@@ -3,6 +3,7 @@ package com.myrestaurant.api.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.myrestaurant.api.vo.UserRequestVO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,11 +36,11 @@ public class User implements Serializable {
     @JsonProperty(value = "email")
     private String email;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     @JsonProperty(value = "password")
     private String password;
 
-    @JsonIgnore
     @CreationTimestamp
     @Column(name = "creation_date", nullable = false, columnDefinition = "datetime")
     @JsonProperty(value = "creationDate")
@@ -51,5 +52,12 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
     private List<Group> groups = new ArrayList<>();
+
+    public User(UserRequestVO userRequestVO) {
+        this.name = userRequestVO.getName();
+        this.email = userRequestVO.getEmail();
+        this.password = userRequestVO.getPassword();
+        this.creationDate = LocalDateTime.now();
+    }
 
 }
